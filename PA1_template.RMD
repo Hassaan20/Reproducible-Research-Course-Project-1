@@ -8,7 +8,6 @@ library(scales)
 library(Hmisc)
 ```
 
-
 ```{r, results='markup', warning=TRUE, message=TRUE}
 if(!file.exists('activity.csv')){
     unzip('activity.zip')
@@ -34,9 +33,6 @@ stepsByDay <- tapply(activityData$steps, activityData$date, sum, na.rm=TRUE)
 ```{r}
 qplot(stepsByDay, xlab='Total steps per day', ylab='Frequency using binwith 500', binwidth=500)
 ```
-
-
-
 ##### 2. Mean and median total number of steps taken per day
 
 ```{r}
@@ -57,10 +53,7 @@ averageStepsPerTimeBlock <- aggregate(x=list(meanSteps=activityData$steps), by=l
 ##### 1. Time series plot
 
 ```{r}
-ggplot(data=averageStepsPerTimeBlock, aes(x=interval, y=meanSteps)) +
-    geom_line() +
-    xlab("5-minute interval") +
-    ylab("average number of steps taken") 
+ggplot(data=averageStepsPerTimeBlock, aes(x=interval, y=meanSteps)) + geom_line() + xlab("5-minute interval") + ylab("average number of steps taken") 
 ```
 ##### 2. The 5-minute interval on average across all the days in the dataset that contains the maximum number of steps?
 
@@ -98,9 +91,6 @@ stepsByDayImputed <- tapply(activityDataImputed$steps, activityDataImputed$date,
 qplot(stepsByDayImputed, xlab='Total steps per day (Imputed)', ylab='Frequency using binwith 500', binwidth=500)
 ```
 
-
- 
-
 ##### ... and Calculate and report the mean and median total number of steps taken per day. 
 
 ```{r}
@@ -110,12 +100,10 @@ stepsByDayMedianImputed <- median(stepsByDayImputed)
 * Mean (Imputed): `r stepsByDayMeanImputed`
 * Median (Imputed):  `r stepsByDayMedianImputed`
 
-
 ----
 
 ## Are there differences in activity patterns between weekdays and weekends?
 ##### 1. Create a new factor variable in the dataset with two levels ??? ???weekday??? and ???weekend??? indicating whether a given date is a weekday or weekend day.
-
 
 ```{r}
 activityDataImputed$dateType <-  ifelse(as.POSIXlt(activityDataImputed$date)$wday %in% c(0,6), 'weekend', 'weekday')
@@ -123,12 +111,7 @@ activityDataImputed$dateType <-  ifelse(as.POSIXlt(activityDataImputed$date)$wda
 
 ##### 2. Panel plot containing a time series plot
 
-
 ```{r}
 averagedActivityDataImputed <- aggregate(steps ~ interval + dateType, data=activityDataImputed, mean)
-ggplot(averagedActivityDataImputed, aes(interval, steps)) + 
-    geom_line() + 
-    facet_grid(dateType ~ .) +
-    xlab("5-minute interval") + 
-    ylab("avarage number of steps")
+ggplot(averagedActivityDataImputed, aes(interval, steps)) + geom_line() + facet_grid(dateType ~ .) + xlab("5-minute interval") +  ylab("avarage number of steps")
 ```
