@@ -110,7 +110,7 @@ stepsByDayImputed <- tapply(activityDataImputed$steps, activityDataImputed$date,
 qplot(stepsByDayImputed, xlab='Total steps per day (Imputed)', ylab='Frequency using binwith 500', binwidth=500)
 ```
 
-![plot of isttotalstepsperdayimputed](figure/isttotalstepsperdayimputed.png)
+![plot of histtotalstepsperdayimputed](figure/histtotalstepsperdayimputed.png)
 
 
  
