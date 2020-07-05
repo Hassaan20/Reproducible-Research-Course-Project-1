@@ -66,13 +66,10 @@ averageStepsPerTimeBlock <- aggregate(x=list(meanSteps=activityData$steps), by=l
 
 
 ```r
-ggplot(data=averageStepsPerTimeBlock, aes(x=interval, y=meanSteps)) +
-    geom_line() +
-    xlab("5-minute interval") +
-    ylab("average number of steps taken") 
+ggplot(data=averageStepsPerTimeBlock, aes(x=interval, y=meanSteps)) + geom_line() + xlab("5-minute interval") + ylab("average number of steps taken") 
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of average5minuteinterval](figure/average5minuteinterval.png)
 ##### 2. The 5-minute interval on average across all the days in the dataset that contains the maximum number of steps?
 
 
@@ -113,7 +110,7 @@ stepsByDayImputed <- tapply(activityDataImputed$steps, activityDataImputed$date,
 qplot(stepsByDayImputed, xlab='Total steps per day (Imputed)', ylab='Frequency using binwith 500', binwidth=500)
 ```
 
-![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png)
+![plot of isttotalstepsperdayimputed](figure/isttotalstepsperdayimputed.png)
 
 
  
@@ -147,11 +144,7 @@ activityDataImputed$dateType <-  ifelse(as.POSIXlt(activityDataImputed$date)$wda
 ```r
 averagedActivityDataImputed <- aggregate(steps ~ interval + dateType, data=activityDataImputed, mean)
 
-ggplot(averagedActivityDataImputed, aes(interval, steps)) + 
-    geom_line() + 
-    facet_grid(dateType ~ .) +
-    xlab("5-minute interval") + 
-    ylab("avarage number of steps")
+ggplot(averagedActivityDataImputed, aes(interval, steps)) + geom_line() + facet_grid(dateType ~ .) + xlab("5-minute interval") + ylab("avarage number of steps")
 ```
 
-![plot of chunk unnamed-chunk-15](figure/unnamed-chunk-15-1.png)
+![plot of 5minutetimeseriescompare](figure/5minutetimeseriescompare.png)
